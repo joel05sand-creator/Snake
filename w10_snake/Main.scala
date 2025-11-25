@@ -1,5 +1,5 @@
 package snake
-///////////////////////////
+/////////////////////////// banan
 def createOnePlayerGame(): Unit = 
   Settings.default.windowTitle = "Snake: One Player"
   OnePlayerGame().play()
