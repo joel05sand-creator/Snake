@@ -7,7 +7,8 @@ class Player(
   var points: Int = 0,    // TODO: count points when e.g. eating apple
 ):
   def handleKey(key: String): Unit = 
-    ??? // om key ingår i keyMap så uppdatera snake.dir
+    if keyMap.dir.contains(key)
+      then snake.dir = (keyMap.dir(key)) // om key ingår i keyMap så uppdatera snake.dir
 
 object Player:
   enum KeyMap(left: String, right: String, up: String, down: String):

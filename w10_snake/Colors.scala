@@ -14,3 +14,7 @@ object Colors:
   val DarkPink    = Color(242,128,161,100).darker
   val Black       = Color.black
   val DarkGray    = Color.gray.darker.darker
+
+  val huvud = Pink
+  val svans = DarkPink
+  val bakgrund = DarkGray
