@@ -5,7 +5,9 @@ class Player(
   var keyMap: Player.KeyMap, 
   val snake: Snake,
   var points: Int = 0,    // TODO: count points when e.g. eating apple
-):
+  // var highscore; valfritt tillägg
+)
+:
   def handleKey(key: String): Unit = 
     if keyMap.dir.contains(key)
       then snake.dir = (keyMap.dir(key)) // om key ingår i keyMap så uppdatera snake.dir

@@ -22,9 +22,19 @@ class Snake (
   private var _nbrOfApples = 0
   def nbrOfApples: Int = _nbrOfApples
 
-  def reset(): Unit = ???  // återställ starttillstånd, ge rätt svanslängd
+  def reset(): Unit = {
+    body.clear()
+    body ++= initBody.take(initLength) //återställer kroppens längd till startlängd
+    _nbrOfSteps = 0 // återställer steg till 0
+    _nbrOfApples = 0 // återställer äpplen till 0
+    dir = initDir // originalriktningen på ormen
+  } 
 
-  def grow(): Unit = ??? // väx i rätt riktning med extra svansposition
+  def grow(): Unit = 
+    if (_nbrOfSteps >= startGrowingAfter && (_nbrOfSteps - startGrowingAfter) % growEvery == 0) {
+      val tail = body.last
+      body = body :+ tail // lägger till längd på svansen 
+    } // väx i rätt riktning med extra svansposition
 
   def shrink(): Unit = ??? // krymp svansen om kroppslängden är större än 2
 
