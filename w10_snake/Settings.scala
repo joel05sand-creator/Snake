@@ -30,9 +30,6 @@ class Settings(configs: Map[String, String]):
     val growEvery: Int         = getOrElse("snake.growEvery", 10)
     val startGrowingAfter: Int = getOrElse("snake.startGrowingAfter", 400)
 
-  object monster: 
-    val color: Color = getOrElse("monster.color", Colors.Pink)
-
 object Settings:
   def configsFromFile(): Map[String, String] = Map() // TODO: read from file
   given default: Settings = Settings(configsFromFile())

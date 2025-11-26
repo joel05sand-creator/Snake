@@ -1,8 +1,5 @@
 package snake
 /////////////////////////// banan
-def createOnePlayerGame(): Unit = 
-  Settings.default.windowTitle = "Snake: One Player"
-  OnePlayerGame().play()
 
 def createTwoPlayerGame(): Unit = 
   Settings.default.windowTitle = "Snake: Two Player"
@@ -15,7 +12,6 @@ def run: Unit =
   val selected = 
     introprog.Dialog.select("Number of players?", buttons, "Snake")
   selected match 
-    case "One"         => createOnePlayerGame()
     case "Two"         => createTwoPlayerGame()
     case "Competition" => println(s"TODO: $selected") 
     case "Tournament"  => println(s"TODO: $selected") 

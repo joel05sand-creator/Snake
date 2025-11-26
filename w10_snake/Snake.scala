@@ -36,7 +36,14 @@ class Snake (
       body = body :+ tail // lägger till längd på svansen 
     } // väx i rätt riktning med extra svansposition
 
-  def shrink(): Unit = ??? // krymp svansen om kroppslängden är större än 2
+  def shrink(): Unit = {
+  if (nbrOfSteps > startShrinkAfter &&
+      shrinkEvery > 0 &&
+      (nbrOfSteps - startShrinkAfter) % shrinkEvery == 0 &&
+      body.length > 1) {
+    body = body.dropRight(1) // tar bort sista svanspositionen
+  }
+} // krymp svansen om kroppslängden är större än 2
 
   def isOccupyingBlockAt(p: Pos): Boolean = ??? // kolla om p finns i kroppen
 
@@ -44,13 +51,8 @@ class Snake (
 
   def isTailCollision(other: Snake): Boolean = ??? // mitt huvud i annans svans
 
-  private var _isEatenByMonster: Boolean = false
-  def isEatenByMonster: Boolean = _isEatenByMonster
-  def eatenByMonster(): Unit = ???
-
   def move(): Unit = ??? 
     // väx och krymp enl. regler
-    // åtgärder om äter frukt eller blir uppäten av monster
 
   override def toString = // bra vid println-debugging
     body.map(p => (p.x, p.y)).mkString(">:)", "~", s" going $dir")

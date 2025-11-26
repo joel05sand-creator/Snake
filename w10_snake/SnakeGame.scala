@@ -36,9 +36,6 @@ abstract class SnakeGame(settings: Settings) extends introprog.BlockGame(
     pixelWindow.hide()
     state = Quitting
 
-  def randomFreePos(): Pos = 
-    ??? // dra slump-pos tills ledig plats, används av frukt, monster
-
   override def onKeyDown(key: String): Unit = 
     println(s"""key "$key" pressed""")
     state match 
