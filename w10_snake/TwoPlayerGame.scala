@@ -1,6 +1,56 @@
 package snake
 
-class TwoPlayerGame:  // ska ärva SnakeGame
+class TwoPlayerGame(using settings: settings) extends SnakeGame(settings):
+  
+  private def greenPlayer = players(0)
+  private def bluePlayer = players(1)
+  private def greenSnake = greenPlayer.snake
+  private def blueSnake = bluePlayer.snake
+  // komma åt ormarna som spelarna styr
+    val greenDead =
+      greenSnake.isTailCollision(greenSnake) ||
+      greenSnake.isTailCollision(blueSnake) ||
+      greenSnake.isHeadCollision(blueSnake)
+    val blueDead =
+      blueSnake.isTailCollision(blueSnake) ||
+      blueSnake.isTailCollision(greenSnake) ||
+      blueSnake.isTailCollision(greenSnake)
+    greenDead || blueDead
+// spelet är slut om någon orm dör eller om huvudena krockar.
+override def enterGameOverState(): Unit =
+  state = SnakeGame.State.enterGameOver
+  clearMessageArea()
+
+  val greenDead =
+    greenSnake.isTailCollision(greenSnake) ||
+    greenSnake.isTailCollision(blueSnake) ||
+    greenSnake.isHeadCollision(blueSnake)
+  val blueDead =
+    blueSnake.isTailCollision(blueSnake) ||
+    blueSnake.isTailCollision(greenSnake) ||
+    blueSnake.isHeadCollision(greenSnake)
+  
+  val msg =
+      if greenDead && blueDead then
+        "Game Over! Draw! Press SPACE to restart!"
+      else if greenDead then
+        s"Game Over! ${bluePlayer.name} player wins! Press SPACE to restart!"
+      else if blueDead then
+        s"Game Over! ${greenPlayer.name} player wins! Press SPACE to restart!"
+      else
+        "Game Over! Press SPACE to restart!"
+
+  val (w, h) = settings.windowSize
+  drawTextCentered(msg, w / 2, h / 2) // texten i spelplanet
+
+private def drawTextCentered(text: String, x: Int, y: Int): Unit =
+  drawText(text, x, y) //hjälpfunktion för centrerad text
+
+override def play(playerNames: String*): Unit =
+  val greenName = playerNames.lift(0).getOrElse("Green")
+  val blueName = playerNames.lift(1).getOrElse("Blue")
+  
+// ska ärva SnakeGame
 
   // ormar och ev. äpple, bananer etc
 
