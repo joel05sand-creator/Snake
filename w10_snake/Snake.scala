@@ -45,11 +45,11 @@ class Snake (
   }
 } // krymp svansen om kroppslängden är större än 2
 
-  def isOccupyingBlockAt(p: Pos): Boolean = ??? // kolla om p finns i kroppen
+  def isOccupyingBlockAt(p: Pos): Boolean = body.contains(p) // kolla om p finns i kroppen
 
-  def isHeadCollision(other: Snake): Boolean = ??? // kolla om huvudena krockar
+  def isHeadCollision(other: Snake): Boolean = body.tail.contains(this.body.head) // kolla om huvudena krockar
 
-  def isTailCollision(other: Snake): Boolean = ??? // mitt huvud i annans svans
+  def isTailCollision(other: Snake): Boolean = other.body.tail.contains(this.body.head) // mitt huvud i annans svans
 
   def move(): Unit = ??? 
     // väx och krymp enl. regler
