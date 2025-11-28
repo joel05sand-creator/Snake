@@ -9,8 +9,19 @@ class Player(
 )
 :
   def handleKey(key: String): Unit = 
-    if keyMap.dir.contains(key)
-      then snake.dir = (keyMap.dir(key)) // om key ingår i keyMap så uppdatera snake.dir
+    
+    if keyMap.dir.contains(key) then
+      if (keyMap.dir(key)!=isOpposite(snake.dir))
+        then snake.dir = (keyMap.dir(key)) // om key ingår i keyMap så uppdatera snake.dir
+    
+
+  def isOpposite(dir: Dir): Dir =
+    dir match
+      case North => South
+      case South => North
+      case East => West
+      case West => East
+
 
 object Player:
   enum KeyMap(left: String, right: String, up: String, down: String):
