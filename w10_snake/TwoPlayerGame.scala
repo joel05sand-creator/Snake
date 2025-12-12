@@ -49,6 +49,25 @@ private def drawTextCentered(text: String, x: Int, y: Int): Unit =
 override def play(playerNames: String*): Unit =
   val greenName = playerNames.lift(0).getOrElse("Green")
   val blueName = playerNames.lift(1).getOrElse("Blue")
+
+  val dim = Dim(settings.windowSize)
+  val middleY = dim.y / 2
+  
+  val greenStartPos = Pos(dim.x / 4, middleY, dim)
+  val blueStartPos = Pos(3 * dim.x / 4, middleY, dim)
+
+  val greenSnake =
+    new Snake(
+      initPos = greenStartPos,
+      initDir = East,
+      headColor = Colors.Green,
+      tailColor = Colors.DarkGreen
+    )(using this, settings)
+  
+  val greenPlayer = Player(greenName, Player.KeyMap.Letters, greenSnake)
+  val bluePlayer  = Player(blueName,  Player.KeyMap.Arrows,  blueSnake)
+
+  start(greenPlayer, bluePlayer)(greenSnake, blueSnake)
   
 // ska ärva SnakeGame
 
