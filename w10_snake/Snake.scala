@@ -51,12 +51,20 @@ class Snake (
 
   def isTailCollision(other: Snake): Boolean = other.body.tail.contains(this.body.head) // mitt huvud i annans svans
 
-  def move(): Unit = ??? 
+  def move(): Unit = 
+    _nbrOfSteps += 1
+    val newHead = body.head + dir
+    body.prepend(newHead)
+    grow()
+    shrink()
     // väx och krymp enl. regler
 
   override def toString = // bra vid println-debugging
     body.map(p => (p.x, p.y)).mkString(">:)", "~", s" going $dir")
 
-  def draw(): Unit = ???
+  def draw(): Unit = 
+    ctx.drawBlock(body.head, headColor)
+    body.tail.foreach(p => ctx.drawBlock(p, tailColor))
 
-  def erase(): Unit = ???
+  def erase(): Unit = 
+    body.foreach(p => ctx.eraseBlock(p))
