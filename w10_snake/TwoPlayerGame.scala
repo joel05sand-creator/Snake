@@ -64,8 +64,17 @@ override def play(playerNames: String*): Unit =
       tailColor = Colors.DarkGreen
     )(using this, settings)
   
+  val blueSnake =
+    new Snake(
+      initPos = blueStartPos,
+      initDir = West,
+      headColor = Colors.Blue,
+      tailColor = Colors.DarkBlue
+    )(using this, settings)
+
+  
   val greenPlayer = Player(greenName, Player.KeyMap.Letters, greenSnake)
-  val bluePlayer  = Player(blueName,  Player.KeyMap.Arrows,  blueSnake)
+  val bluePlayer  = Player(blueName,  Player.KeyMap.Arrows, blueSnake)
 
   start(greenPlayer, bluePlayer)(greenSnake, blueSnake)
   
